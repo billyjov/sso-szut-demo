@@ -1,11 +1,43 @@
-<!-- <div class="header">
-  <div class="row">
-    <div class="col-md-8">
-      <h1 style="text-align: center;">Tasks</h1>
+<nav class="navbar navbar-expand-lg bg-body-tertiary">
+  <div class="container-fluid">
+    <a class="navbar-brand" href="">DEMO SSO</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+      data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup"
+      aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+      <div class="navbar-nav">
+        <a class="nav-link active" aria-current="page"
+          routerLink="/home">Home</a>
+        <a class="nav-link" routerLink="/employee">Employees</a>
+      </div>
     </div>
-    <div class="col-md-2">
-      <h4><a href="#" (click)="logout()">Logout</a></h4>
-      <h4><a href="#" (click)="login()">LogIn</a></h4>
-    </div>
+    <form class="container-fluid justify-content-end d-flex">
+      <button class="btn btn-sm btn-outline-primary mx-2" type="button"
+        (click)="refresh()">
+        Refresh
+      </button>
+      <button class="btn btn-sm btn-outline-success mx-2" type="button"
+        (click)="reload()">
+        Reload
+      </button>
+      <button class="btn btn-sm btn-outline-danger mx-2" type="button"
+        (click)="clearStorage()">
+        Clear Storage
+      </button>
+      <ng-container *ngIf="isAuthenticated$ | async">
+        <button class="btn btn-sm btn-outline-secondary" type="button"
+          (click)="logout()">
+          Logout
+        </button>
+      </ng-container>
+      <ng-container *ngIf="!(isAuthenticated$ | async)">
+        <button class="btn btn-sm btn-outline-secondary" type="button"
+          (click)="login()">
+          Login
+        </button>
+      </ng-container>
+    </form>
   </div>
-</div> -->
+</nav>

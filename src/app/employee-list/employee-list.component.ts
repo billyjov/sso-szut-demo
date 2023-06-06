@@ -19,11 +19,11 @@ export class EmployeeListComponent {
     this.fetchData();
   }
 
-  fetchData() {
+  public fetchData(): void {
     this.employees$ = this.http.get<Employee[]>('/backend', {
       headers: new HttpHeaders()
         .set('Content-Type', 'application/json')
-        .set('Authorization', `Bearer ${this.oauthService.getAccessToken()}`),
+        // .set('Authorization', `Bearer ${this.oauthService.getAccessToken()}`),
         // .set('Authorization', `Bearer ${this.bearer}`),
     });
   }

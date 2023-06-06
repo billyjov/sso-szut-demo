@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
-import { OAuthService } from 'angular-oauth2-oidc';
-import { KeycloakService } from 'keycloak-angular';
+
+import { AuthService } from '../core/auth.service';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-header',
@@ -9,21 +9,32 @@ import { KeycloakService } from 'keycloak-angular';
   styleUrls: ['./header.component.css'],
 })
 export class HeaderComponent {
-  constructor(
-    private route: ActivatedRoute,
-    private router: Router,
-    private oauthService: OAuthService
-    // private keycloakService: KeycloakService
-  ) {}
+  public isAuthenticated$: Observable<boolean> =
+    this.authService.isAuthenticated$;
 
-  public logout(): void {
-
-     this.oauthService.logOut();
-    // this.keycloakService.logout();
-  }
+  constructor(private authService: AuthService) {}
 
   public login(): void {
-    this.oauthService.initLoginFlow();
-    // this.keycloakService.login();
+    this.authService.login();
+  }
+
+  public logout(): void {
+    this.authService.logout();
+  }
+
+  public logoutExternally(): void {
+    window.open(this.authService.logoutUrl);
+  }
+
+  public refresh(): void {
+    this.authService.refresh();
+  }
+
+  public reload(): void {
+    window.location.reload();
+  }
+
+  public clearStorage(): void {
+    localStorage.clear();
   }
 }
